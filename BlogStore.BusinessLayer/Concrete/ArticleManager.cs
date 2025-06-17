@@ -18,6 +18,11 @@ namespace BlogStore.BusinessLayer.Concrete
             _articleDal = articleDal;
         }
 
+        public List<Article> TGetArticlesWithCategories()
+        {
+            return _articleDal.GetArticlesWithCategories();
+        }
+
         public void TDelete(int id)
         {
             _articleDal.Delete(id);
