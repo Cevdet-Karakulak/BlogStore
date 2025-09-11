@@ -17,5 +17,7 @@ namespace BlogStore.EntityLayer.Entities
         public AppUser AppUser { get; set; }
         public int ArticleId { get; set; }
         public Article Article { get; set; }
+        public bool IsToxic { get; set; }
+        public float ToxicityScore { get; set; }
     }
 }

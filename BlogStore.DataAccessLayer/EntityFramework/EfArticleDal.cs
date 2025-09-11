@@ -19,9 +19,87 @@ namespace BlogStore.DataAccessLayer.EntityFramework
             _context = context;
         }
 
+        public AppUser GetAppUserByArticleId(int id)
+        {
+            string userId = _context.Articles.Where(x => x.ArticleId == id).Select(y => y.AppUserId).FirstOrDefault();
+            var userValue = _context.Users.Where(x => x.Id == userId).FirstOrDefault();
+            return userValue;
+        }
+
+        public Article GetArticleBySlug(string slug)
+        {
+            return _context.Articles
+         .Include(x => x.AppUser)
+         .Include(x => x.Category)
+         .FirstOrDefault(x => x.Slug == slug);
+        }
+
+        public List<Article> GetArticlesByAppUser(string id)
+        {
+            return _context.Articles.Where(x => x.AppUserId == id).Include(x => x.Category).ToList();
+
+        }
+
+        public List<Article> GetArticlesByUserId(string id)
+        {
+            return _context.Articles
+       .Include(x => x.AppUser)
+       .Include(x => x.Category)
+       .Where(x => x.AppUserId == id)
+       .OrderByDescending(x => x.CreatedDate)
+       .ToList();
+        }
+
         public List<Article> GetArticlesWithCategories()
         {
-            return _context.Articles.Include(x=>x.Category).ToList();
+            return _context.Articles.Include(x => x.Category).ToList();
+        }
+
+
+
+        public Article GetArticleWithUser(int id)
+        {
+            return _context.Articles.Include(x => x.AppUser).FirstOrDefault(x => x.ArticleId == id);
+        }
+
+        public List<Article> GetLast5ArticlesByUser(string id)
+        {
+            return _context.Articles
+        .Where(a => a.AppUserId == id)
+        .OrderByDescending(a => a.CreatedDate)
+        .Take(5)
+        .ToList();
+        }
+
+
+
+        public List<Article> GetTop3PopularArticles()
+        {
+            var values = _context.Articles.OrderByDescending(x => x.ArticleId).Take(3).ToList();
+            return values;
+        }
+
+        public List<Article> GetArticlesByCategoryId(int id)
+        {
+            return _context.Articles
+       .Include(a => a.Category)
+       .Include(a => a.AppUser)
+       .Where(a => a.CategoryId == id)
+       .ToList();
+        }
+
+        public List<(string CategoryName, int ArticleCount)> GetArticleCountByCategory()
+        {
+            var result = _context.Articles
+            .Include(a => a.Category)
+            .GroupBy(a => a.Category.CategoryName)
+            .Select(g => new ValueTuple<string, int>(
+                g.Key,
+                g.Count()
+            ))
+            .ToList();
+
+            return result;
         }
     }
 }

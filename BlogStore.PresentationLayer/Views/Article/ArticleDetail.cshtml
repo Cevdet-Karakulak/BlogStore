@@ -1,17 +1,22 @@
-﻿﻿@{
+﻿﻿
+@{
     Layout = null;
 }
-
+<!-- /*
+* Template Name: Blogy
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
 <!doctype html>
 <html lang="en">
-
 @await Component.InvokeAsync("_HeadLayoutComponentPartial")
-
 <body>
+
 
     @await Component.InvokeAsync("_NavbarLayoutComponentPartial")
 
-    @await Component.InvokeAsync("_ArticleDetailMainCoverImageComponentPartial")
+        @await Component.InvokeAsync("_ArticleDetailMainCoverImageComponentPartial", new { id = ViewBag.ArticleId })
 
     <section class="section">
         <div class="container">
@@ -20,14 +25,15 @@
 
                 <div class="col-md-12 col-lg-8 main-content">
 
-                    @await Component.InvokeAsync("_ArticleDetailContentComponentPartial", new { id = ViewBag.i })
+                        @await Component.InvokeAsync("_ArticleDetailContentComponentPartial", new { id = ViewBag.ArticleId })
+
 
                     <div class="pt-5">
                         <p>Categories:  <a href="#">Food</a>, <a href="#">Travel</a>  Tags: <a href="#">#manila</a>, <a href="#">#asia</a></p>
                     </div>
 
 
-                    @await Component.InvokeAsync("_ArticleDetailCommentListComponentPartial", new { id = ViewBag.i })
+                        @await Component.InvokeAsync("_ArticleDetailCommentListComponentPartial", new { id = ViewBag.ArticleId })
 
                 </div>
 
@@ -37,18 +43,15 @@
                     <div class="sidebar-box search-form-wrap">
                         <form action="#" class="sidebar-search-form">
                             <span class="bi-search"></span>
-                            <input type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
+                            <input type="text" class="form-control" id="s" placeholder="Aradığınız kelimeyi girin">
                         </form>
                     </div>
                     <!-- END sidebar-box -->
-                    @await Component.InvokeAsync("_ArticleDetailAboutAuthorComponentPartial")
-
-                    <!-- END sidebar-box -->
+                        @await Component.InvokeAsync("_ArticleDetailAboutAuthorComponentPartial", new { id = ViewBag.ArticleId })
+                        <!-- END sidebar-box -->
                     @await Component.InvokeAsync("_ArticleDetailPopularPostsComponentPartial")
                     <!-- END sidebar-box -->
                     @await Component.InvokeAsync("_ArticleDetailCategoryListComponentPartial")
-
-
                     <!-- END sidebar-box -->
 
                     <div class="sidebar-box">
@@ -78,10 +81,9 @@
 
     <!-- Start posts-entry -->
     <!-- End posts-entry -->
-    @await Component.InvokeAsync("_ArticleDetailFooterComponentPartial")
-    <!-- /.site-footer -->
     <!-- Preloader -->
     @await Component.InvokeAsync("_ScriptsLayoutComponentPartial")
+
 
 </body>
 </html>

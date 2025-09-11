@@ -1,55 +1,98 @@
 ﻿using BlogStore.BusinessLayer.Abstract;
 using BlogStore.EntityLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BlogStore.PresentationLayer.Controllers
 {
+    [Route("[controller]/[action]")]
     public class CommentController : Controller
     {
         private readonly ICommentService _commentService;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly IToxicityDetectionService _toxicityDetectionService;
+        private readonly ITranslationService _translationService;
 
-        public CommentController(ICommentService commentService)
+        public CommentController(ICommentService commentService, UserManager<AppUser> userManager, IToxicityDetectionService toxicityDetectionService, ITranslationService translationService)
         {
             _commentService = commentService;
+            _userManager = userManager;
+            _toxicityDetectionService = toxicityDetectionService;
+            _translationService = translationService;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateComment(Comment comment)
+        {
+            try
+            {
+                if (comment == null || string.IsNullOrWhiteSpace(comment.CommentDetail))
+                    return Json(new { status = "error", message = "Yorum verisi eksik veya geçersiz." });
+
+                var translatedCommentDetail = await _translationService.TranslateToEnglishAsync(comment.CommentDetail)
+                                            ?? comment.CommentDetail; // Çeviri başarısızsa orijinal metni kullan
+
+                var detectionResult = await _toxicityDetectionService.DetectToxicityAsync(translatedCommentDetail);
+
+                comment.IsToxic = detectionResult.IsToxic;
+                comment.ToxicityScore = (float)detectionResult.Score;
+                comment.AppUserId = _userManager.GetUserId(User);
+                comment.UserNameSurname = _userManager.GetUserName(User);
+                comment.CommentDate = DateTime.Now;
+
+                _commentService.TInsert(comment);
+
+                if (detectionResult.IsToxic)
+                    return Json(new { status = "toxic", message = "Yorumunuz toksik içerik barındırıyor." });
+
+                return Json(new { status = "success", message = "Yorumunuz başarıyla eklendi." });
+            }
+            catch (Exception ex)
+            {
+                var inner = ex.InnerException?.Message ?? "No inner exception";
+                return Json(new { success = false, message = "Bir hata oluştu: " + ex.Message + " | Inner: " + inner });
+            }
+        }
+
+        [HttpGet]
         public IActionResult CommentList()
         {
             var values = _commentService.TGetAll();
             return View(values);
         }
+
         [HttpGet]
-        public IActionResult CreateComment()
+        [Authorize]
+        public async Task<IActionResult> TestToxicity(string text)
         {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult CreateComment(Comment comment)
-        {
-            comment.CommentDate = DateTime.Now;
-            comment.IsValid = false;
-            _commentService.TInsert(comment);
-            return RedirectToAction("CommentList");
-        }
-        public IActionResult DeleteComment(int id)
-        {
-            _commentService.TDelete(id);
-            return RedirectToAction("CommentList");
-        }
-        [HttpGet]
-        public IActionResult UpdateComment(int id)
-        {
-            var values = _commentService.TGetById(id);
-            return View(values);
-        }
-        
-        [HttpPost]
-        public IActionResult UpdateComment(Comment comment)
-        {
-            comment.CommentDate = DateTime.Now;
-            comment.IsValid = false;
-            _commentService.TUpdate(comment);
-            return RedirectToAction("CommentList");
+            if (string.IsNullOrWhiteSpace(text))
+                return Json(new { success = false, message = "Metin boş olamaz." });
+
+            try
+            {
+                var translated = await _translationService.TranslateToEnglishAsync(text)
+                                  ?? text; // Çeviri başarısızsa orijinal metni kullan
+
+                var result = await _toxicityDetectionService.DetectToxicityAsync(translated);
+
+                return Json(new
+                {
+                    success = true,
+                    input = text,
+                    translated = translated,
+                    isToxic = result.IsToxic,
+                    score = result.Score,
+                    detectedLabel = result.DetectedLabel
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
         }
     }
 }

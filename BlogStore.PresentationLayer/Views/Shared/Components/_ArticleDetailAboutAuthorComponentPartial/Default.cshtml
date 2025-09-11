@@ -1,9 +1,23 @@
-﻿﻿<div class="sidebar-box">
+﻿@model BlogStore.EntityLayer.Entities.AppUser
+
+<style>
+    .bio img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #0d6efd;
+        display: block;
+        margin: 0 auto 15px auto;
+    }
+</style>
+
+<div class="sidebar-box">
     <div class="bio text-center">
-        <img src="/blogy-1.0.0/images/person_2.jpg" alt="Image Placeholder" class="img-fluid mb-3">
+        <img src="@Model.ImageUrl" alt="Yazar Resmi" />
         <div class="bio-body">
-            <h2>Cevdet Karakulak</h2>
-            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facilis sunt repellendus excepturi beatae porro debitis voluptate nulla quo veniam fuga sit molestias minus.</p>
+            <h2>@Model.Name @Model.Surname</h2>
+            <p class="mb-4">@Model.Description</p>
             <p><a href="#" class="btn btn-primary btn-sm rounded px-2 py-2">Yazar Profili</a></p>
             <p class="social">
                 <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
