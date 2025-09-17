@@ -46,7 +46,7 @@ namespace BlogStore.PresentationLayer.Controllers
 
                 if (detectionResult.IsToxic)
                 {
-                    return Json(new { status = "toxic", message = "Yorumunuz toksik içerik barındırıyor." });
+                    return Json(new { status = "toxic", message = "Paylaşımınızda topluluk kurallarımıza uygun olmayan ifadeler tespit edildiği için yorumunuz işleme alınamadı." });
                 }
 
                 _commentService.TInsert(comment);
@@ -78,7 +78,7 @@ namespace BlogStore.PresentationLayer.Controllers
             try
             {
                 var translated = await _translationService.TranslateToEnglishAsync(text)
-                                  ?? text; // Çeviri başarısızsa orijinal metni kullan
+                                  ?? text; 
 
                 var result = await _toxicityDetectionService.DetectToxicityAsync(translated);
 
