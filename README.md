@@ -99,7 +99,9 @@ BlogStore, ASP.NET Core MVC, Entity Framework Core ve Hugging Face AI entegrasyo
 <img width="1540" height="828" alt="Image" src="https://github.com/user-attachments/assets/c775afcc-ee9d-4d80-8907-5acc6f0866e8" />
 
 <img width="1591" height="820" alt="Image" src="https://github.com/user-attachments/assets/08de3350-6a67-4d3c-bdea-89206c6520dc" />
+
 ---
+
 ## ⚙️ Kurulum & Çalıştırma
 
 ```bash
