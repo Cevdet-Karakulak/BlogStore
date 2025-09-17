@@ -34,7 +34,7 @@ namespace BlogStore.PresentationLayer.Controllers
                     return Json(new { status = "error", message = "Yorum verisi eksik veya geçersiz." });
 
                 var translatedCommentDetail = await _translationService.TranslateToEnglishAsync(comment.CommentDetail)
-                                            ?? comment.CommentDetail; // Çeviri başarısızsa orijinal metni kullan
+                                            ?? comment.CommentDetail;
 
                 var detectionResult = await _toxicityDetectionService.DetectToxicityAsync(translatedCommentDetail);
 
@@ -44,10 +44,12 @@ namespace BlogStore.PresentationLayer.Controllers
                 comment.UserNameSurname = _userManager.GetUserName(User);
                 comment.CommentDate = DateTime.Now;
 
-                _commentService.TInsert(comment);
-
                 if (detectionResult.IsToxic)
+                {
                     return Json(new { status = "toxic", message = "Yorumunuz toksik içerik barındırıyor." });
+                }
+
+                _commentService.TInsert(comment);
 
                 return Json(new { status = "success", message = "Yorumunuz başarıyla eklendi." });
             }
@@ -57,6 +59,7 @@ namespace BlogStore.PresentationLayer.Controllers
                 return Json(new { success = false, message = "Bir hata oluştu: " + ex.Message + " | Inner: " + inner });
             }
         }
+
 
         [HttpGet]
         public IActionResult CommentList()
