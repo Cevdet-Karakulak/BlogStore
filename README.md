@@ -25,12 +25,31 @@ BlogStore, ASP.NET Core MVC, Entity Framework Core ve Hugging Face AI entegrasyo
 
 ## 🛠️ Kullanılan Teknolojiler
 
-- ASP.NET Core MVC & C#  
-- Entity Framework Core  
-- Identity ile kullanıcı yönetimi  
-- Hugging Face AI (toxicity detection & multi-language support)  
-- AJAX & jQuery ile dinamik yorum sistemi  
-- Chart.js ile admin panel istatistikleri  
+<p align="center">
+  <!-- Backend -->
+  <img src="https://img.shields.io/badge/.NET%208-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" />
+  <img src="https://img.shields.io/badge/ASP.NET%20Core-5C2D91?style=for-the-badge&logo=dotnet&logoColor=white" />
+  <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" />
+  <img src="https://img.shields.io/badge/Entity%20Framework-512BD4?style=for-the-badge&logo=entity-framework&logoColor=white" />
+
+  <!-- Database -->
+  <img src="https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white" />
+
+  <!-- Frontend -->
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+  <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" />
+  <img src="https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white" />
+
+  <!-- AI & API -->
+  <img src="https://img.shields.io/badge/ToxicBERT-FF6F61?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Helsinki-NLP-1ABC9C?style=for-the-badge" />
+  
+  <!-- Diğer -->
+  <img src="https://img.shields.io/badge/AutoMapper-512BD4?style=for-the-badge&logo=automapper&logoColor=white" />
+  <img src="https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chart.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/FluentValidation-007ACC?style=for-the-badge&logo=fluentbit&logoColor=white" />
+</p>
 
 ---
 
@@ -59,29 +78,27 @@ BlogStore, ASP.NET Core MVC, Entity Framework Core ve Hugging Face AI entegrasyo
 
 ---
 ## 📸 Ekran Görselleri
-<img width="1553" height="892" alt="Image" src="https://github.com/user-attachments/assets/6605723d-766f-4def-b496-94704a660b00" />
+<img width="1553" height="892" alt="Image" src="https://github.com/user-attachments/assets/0e59c74a-37cc-4fa4-8af0-a83f4725577d" />
 
-<img width="1544" height="897" alt="Image" src="https://github.com/user-attachments/assets/dfe3d910-4203-4a74-a12a-854cb195b1e7" />
+<img width="1544" height="897" alt="Image" src="https://github.com/user-attachments/assets/5ca88a57-15dc-40b9-b11b-37890e0b8791" />
 
-<img width="1489" height="866" alt="Image" src="https://github.com/user-attachments/assets/81903ff3-41a2-4f2b-9051-f3af6012085a" />
+<img width="1489" height="866" alt="Image" src="https://github.com/user-attachments/assets/eec53189-4551-4027-a897-73e4586e9b8e" />
 
-<img width="1381" height="905" alt="Image" src="https://github.com/user-attachments/assets/61eb33fa-cc2a-4594-b01a-8c04b957d58e" />
+<img width="1381" height="905" alt="Image" src="https://github.com/user-attachments/assets/2270694a-ac7b-4df3-982d-ff5a6f4c668b" />
 
-<img width="1571" height="851" alt="Image" src="https://github.com/user-attachments/assets/ce412a83-9b29-4a79-aa14-52d56dcecf78" />
+<img width="1915" height="772" alt="Image" src="https://github.com/user-attachments/assets/81b77a69-482e-4811-bfa9-bdbec2135671" />
 
-<img width="1893" height="912" alt="Image" src="https://github.com/user-attachments/assets/dc8853f7-b6fd-4488-8d45-dbeba7b71bd9" />
+<img width="1893" height="912" alt="Image" src="https://github.com/user-attachments/assets/a550b9a8-5178-45de-ad60-0c01941e2484" />
 
-<img width="1915" height="772" alt="Image" src="https://github.com/user-attachments/assets/d8cf608e-002c-4232-8bff-d4f56b434974" />
+<img width="1571" height="851" alt="Image" src="https://github.com/user-attachments/assets/8d927023-3ceb-437f-8625-e04561302317" />
 
-<img width="1916" height="823" alt="Image" src="https://github.com/user-attachments/assets/68eaa1f1-41cc-43b9-a9e0-3a18dfa74351" />
+<img width="1916" height="823" alt="Image" src="https://github.com/user-attachments/assets/57864ba0-1d77-40c6-a079-6c351bd498ed" />
 
-<img width="1849" height="895" alt="Image" src="https://github.com/user-attachments/assets/ee42ff6d-fb40-49cd-93cc-a4b8837160aa" />
+<img width="1742" height="896" alt="Image" src="https://github.com/user-attachments/assets/bfdc4f22-9766-48f5-938d-702d1ba35f70" />
 
-<img width="1742" height="896" alt="Image" src="https://github.com/user-attachments/assets/6b192488-5b66-48da-8344-4eae71055dec" />
+<img width="1540" height="828" alt="Image" src="https://github.com/user-attachments/assets/c775afcc-ee9d-4d80-8907-5acc6f0866e8" />
 
-<img width="1591" height="820" alt="Image" src="https://github.com/user-attachments/assets/363ea102-4f0c-4a2a-bf6f-a22f4dd7c165" />
-
-<img width="1540" height="828" alt="Image" src="https://github.com/user-attachments/assets/15bc9847-b955-45bf-a937-b6f8e5b6aa57" />
+<img width="1591" height="820" alt="Image" src="https://github.com/user-attachments/assets/08de3350-6a67-4d3c-bdea-89206c6520dc" />
 ---
 ## ⚙️ Kurulum & Çalıştırma
 
